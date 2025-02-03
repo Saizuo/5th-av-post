@@ -227,55 +227,55 @@ footer {
       padding: 0.3rem 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       overflow: hidden;
-      width: 100%;
+      user-select: none;
+      --gap: 20px;
+      display: flex;
+      gap: var(--gap);
   }
 
-  .ticker-wrapper {
-      display: inline-flex;
-      white-space: nowrap;
-      animation: ticker 40s linear infinite;
-  }
-
-  .ticker-scroll {
-      display: inline-block;
-  }
-
-  .ticker-item {
-      display: inline-flex;
+  .stock-ticker ul {
+      list-style: none;
+      flex-shrink: 0;
+      min-width: 100%;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.3rem;
-      margin-right: 2rem;
+      gap: var(--gap);
+      animation: scroll 40s linear infinite;
   }
 
-  .symbol {
-      font-weight: 600;
+  .stock-ticker:hover ul {
+      animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+      to {
+          transform: translateX(calc(-100% - var(--gap)));
+      }
+  }
+
+  .stock-ticker .symbol,
+  .stock-ticker .price {
+      font-weight: bold;
       font-size: 0.75rem;
   }
 
-  .price {
+  .stock-ticker .price {
+      margin-inline: 4px;
       color: #a0a0a0;
-      font-size: 0.75rem;
   }
 
-  .change {
-      font-size: 0.75rem;
+  .stock-ticker .minus::before {
+      content: "↓";
+  }
+
+  .stock-ticker .minus .change,
+  .stock-ticker .minus::before {
+      color: #F44336;
   }
 
   .change.positive {
       color: #4CAF50;
-  }
-
-  .change.negative {
-      color: #F44336;
-  }
-
-  @keyframes ticker {
-      from {
-          transform: translateX(0);
-      }
-      to {
-          transform: translateX(-100%);
-      }
   }
 
 @media (max-width: 768px) {
